@@ -18,55 +18,55 @@ def get_steps(wire_a_vectors, wire_b_vectors, crossing_point):
 def generate_vectors(directions_line):
     current_x = 0
     current_y = 0
-    occupied_vectors = [(current_x, current_y)]
+    vectors = [(current_x, current_y)]
     for direction, distance in directions_line:
         if direction == 'U':
-            occupied_vectors.extend(up_occupied_vectors(current_x, current_y, distance))
+            vectors.extend(up(current_x, current_y, distance))
             current_y += distance
         elif direction == 'R':
-            occupied_vectors.extend(right_occupied_vectors(current_x, current_y, distance))
+            vectors.extend(right(current_x, current_y, distance))
             current_x += distance
         elif direction == 'D':
-            occupied_vectors.extend(down_occupied_vectors(current_x, current_y, distance))
+            vectors.extend(down(current_x, current_y, distance))
             current_y -= distance
         elif direction == 'L':
-            occupied_vectors.extend(left_occupied_vectors(current_x, current_y, distance))
+            vectors.extend(left(current_x, current_y, distance))
             current_x -= distance
-    return occupied_vectors
+    return vectors
 
 
-def up_occupied_vectors(x, y, distance):
+def up(starting_x, starting_y, distance):
     vectors = list()
-    next_y = y + 1
+    next_y = starting_y + 1
     for _ in range(distance):
-        vectors.append((x, next_y))
+        vectors.append((starting_x, next_y))
         next_y += 1
     return vectors
 
 
-def right_occupied_vectors(x, y, distance):
+def right(starting_x, starting_y, distance):
     vectors = list()
-    next_x = x + 1
+    next_x = starting_x + 1
     for _ in range(distance):
-        vectors.append((next_x, y))
+        vectors.append((next_x, starting_y))
         next_x += 1
     return vectors
 
 
-def down_occupied_vectors(x, y, distance):
+def down(starting_x, starting_y, distance):
     vectors = list()
-    next_y = y - 1
+    next_y = starting_y - 1
     for _ in range(distance):
-        vectors.append((x, next_y))
+        vectors.append((starting_x, next_y))
         next_y -= 1
     return vectors
 
 
-def left_occupied_vectors(x, y, distance):
+def left(starting_x, starting_y, distance):
     vectors = list()
-    next_x = x - 1
+    next_x = starting_x - 1
     for _ in range(distance):
-        vectors.append((next_x, y))
+        vectors.append((next_x, starting_y))
         next_x -= 1
     return vectors
 
